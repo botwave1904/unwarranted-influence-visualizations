@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0d0d0d">
 <title>Corkboard — Unwarranted Influence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,9 +58,27 @@
   --pin-white-s: #888;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; touch-action: manipulation; }
 html, body { margin: 0; padding: 0; height: 100%; overflow: hidden;
   font-family: "Lora", Georgia, serif; background: #0f0a06; color: var(--ui-text); }
+
+/* Mobile viewport fixes */
+@viewport {
+  width: device-width;
+  initial-scale: 1;
+  maximum-scale: 1;
+  user-scalable: no;
+}
+
+/* Prevent text selection on mobile during drag */
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 /* ======================= THE WALL - BROOKLYN BASEMENT / GRAFFITI AESTHETIC ======================= */
 #stage {
@@ -1199,8 +1221,76 @@ body.victim-mode .edge.to-victim path {
 #status.err { color: #ff8080; border-color: rgba(255, 80, 80, 0.5); }
 
 @media (max-width: 768px) {
-  #filterbar { max-width: 160px; font-size: 10px; }
+  #filterbar {
+    max-width: none;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    font-size: 11px;
+    padding: 8px 12px;
+    max-height: 120px;
+    overflow-y: auto;
+    border-radius: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    z-index: 300;
+  }
+  #filterbar h3 { font-size: 12px; margin: 0 0 8px 0; }
+  #chapter-filters { display: flex; flex-wrap: wrap; gap: 4px; }
+  #chapter-filters button {
+    font-size: 10px;
+    padding: 4px 8px;
+    min-width: auto;
+  }
+  #clear-filter { margin-top: 8px; font-size: 10px; padding: 4px 8px; }
   #legend { display: none; }
+  #topbar {
+    padding: 8px 12px;
+    gap: 6px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 44px;
+  }
+  #title {
+    font-size: 14px;
+    flex: 1 1 100%;
+    margin-bottom: 4px;
+  }
+  #title small { display: none; }
+  .btn {
+    font-size: 11px;
+    padding: 6px 10px;
+    min-width: auto;
+  }
+  .btn.zoom { width: 32px; padding: 6px 0; }
+  #zoom-indicator { font-size: 11px; padding: 6px 8px; min-width: 44px; }
+
+  /* Mobile-optimized cards */
+  .card { touch-action: pan-x pan-y; }
+  .card .body {
+    /* Larger touch targets on mobile */
+    min-height: 44px;
+  }
+
+  /* Panel adjustments for mobile */
+  #panel {
+    width: 100%;
+    max-width: none;
+    border-radius: 12px 12px 0 0;
+    top: auto;
+    bottom: 0;
+    height: 70vh;
+    max-height: 70vh;
+    transform: translateY(100%);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #panel.open { transform: translateY(0); }
+
+  /* Ensure cards are visible on small screens */
+  #stage { touch-action: none; }
+  #world { touch-action: none; }
 }
 </style>
 </head>
@@ -1613,11 +1703,29 @@ function buildCard(node) {
   el.style.top = node._y + "px";
   el.style.transform = "rotate(" + node._rot.toFixed(2) + "deg)";
 
-  // events
-  el.addEventListener("click", function (ev) {
+  // events - click and touch
+  function handleActivate(ev) {
     ev.stopPropagation();
+    ev.preventDefault();
     openPanel(node.id);
-  });
+  }
+  el.addEventListener("click", handleActivate);
+
+  // Touch support for cards
+  var touchStartTime = 0;
+  el.addEventListener("touchstart", function(ev) {
+    touchStartTime = Date.now();
+    highlightNeighbors(node.id, true);
+  }, { passive: true });
+  el.addEventListener("touchend", function(ev) {
+    var duration = Date.now() - touchStartTime;
+    highlightNeighbors(node.id, false);
+    // Treat as tap if quick enough
+    if (duration < 300) {
+      handleActivate(ev);
+    }
+  }, { passive: true });
+
   el.addEventListener("mouseenter", function () { highlightNeighbors(node.id, true); });
   el.addEventListener("mouseleave", function () { highlightNeighbors(node.id, false); });
 
@@ -2517,21 +2625,96 @@ function setupPanZoom() {
     applyTransform();
   }, { passive: false });
 
-  // touch pan (single-finger)
+  // touch pan (single-finger) + pinch zoom (two-finger)
   var touchStart = null;
+  var pinchStart = null; // { dist: number, k: number, cx: number, cy: number }
+
+  function getTouchDist(touches) {
+    var dx = touches[0].clientX - touches[1].clientX;
+    var dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+  function getTouchCenter(touches) {
+    return {
+      x: (touches[0].clientX + touches[1].clientX) / 2,
+      y: (touches[0].clientY + touches[1].clientY) / 2
+    };
+  }
+
   stage.addEventListener("touchstart", function (e) {
     if (e.target.closest(".card")) return;
     if (e.touches.length === 1) {
       touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, vx: view.x, vy: view.y };
+    } else if (e.touches.length === 2) {
+      // Start pinch
+      pinchStart = {
+        dist: getTouchDist(e.touches),
+        k: view.k,
+        cx: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        cy: (e.touches[0].clientY + e.touches[1].clientY) / 2
+      };
+      // Also track pan during pinch
+      touchStart = null;
     }
   }, { passive: true });
+
   stage.addEventListener("touchmove", function (e) {
-    if (!touchStart || e.touches.length !== 1) return;
-    view.x = touchStart.vx + (e.touches[0].clientX - touchStart.x);
-    view.y = touchStart.vy + (e.touches[0].clientY - touchStart.y);
-    applyTransform();
+    if (e.touches.length === 1 && touchStart) {
+      // Single finger pan
+      view.x = touchStart.vx + (e.touches[0].clientX - touchStart.x);
+      view.y = touchStart.vy + (e.touches[0].clientY - touchStart.y);
+      applyTransform();
+    } else if (e.touches.length === 2 && pinchStart) {
+      // Pinch zoom
+      e.preventDefault();
+      var newDist = getTouchDist(e.touches);
+      var scale = newDist / pinchStart.dist;
+      var newK = clamp(pinchStart.k * scale, 0.2, 3.0);
+
+      // Zoom toward center of pinch
+      var center = getTouchCenter(e.touches);
+      var rect = stage.getBoundingClientRect();
+      var wx = (center.x - rect.left - view.x) / view.k;
+      var wy = (center.y - rect.top - view.y) / view.k;
+
+      view.x = (center.x - rect.left) - wx * newK;
+      view.y = (center.y - rect.top) - wy * newK;
+      view.k = newK;
+      applyTransform();
+    }
+  }, { passive: false });
+
+  stage.addEventListener("touchend", function(e) {
+    if (e.touches.length === 0) {
+      touchStart = null;
+      pinchStart = null;
+    } else if (e.touches.length === 1) {
+      // Transition from 2 fingers to 1 - resume pan
+      pinchStart = null;
+      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, vx: view.x, vy: view.y };
+    }
+  });
+
+  // Double-tap to zoom
+  var lastTap = 0;
+  stage.addEventListener("touchend", function(e) {
+    if (e.target.closest(".card")) return;
+    var now = Date.now();
+    if (now - lastTap < 300) {
+      // Double tap detected
+      var rect = stage.getBoundingClientRect();
+      var mx = e.changedTouches[0].clientX - rect.left;
+      var my = e.changedTouches[0].clientY - rect.top;
+      var wx = (mx - view.x) / view.k;
+      var wy = (my - view.y) / view.k;
+      var newK = view.k < 1.5 ? 1.8 : 0.6;
+      view.x = mx - wx * newK;
+      view.y = my - wy * newK;
+      view.k = newK;
+      applyTransform();
+    }
+    lastTap = now;
   }, { passive: true });
-  stage.addEventListener("touchend", function(){ touchStart = null; });
 
   // buttons
   $("zoom-in").addEventListener("click", function(){ zoomCenter(1.2); });
