@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPMorgan Chase — Settlement Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+  :root {
+    --ink:   #0d0d0d;
+    --bone:  #e8e2d4;
+    --blood: #8b1a1a;
+    --gold:  #c9a743;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: 'Oswald', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem 0;
+  }
+
+  header {
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem;
+  }
+
+  header h1 {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: var(--bone);
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+
+  header p.subtitle {
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    color: var(--gold);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  #chart-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .axis path,
+  .axis line {
+    stroke: var(--bone);
+    stroke-opacity: 0.2;
+  }
+
+  .axis text {
+    fill: var(--bone);
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+  }
+
+  .axis-label {
+    fill: var(--bone);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .bar-madoff  { fill: var(--bone); }
+  .bar-epstein { fill: var(--blood); }
+
+  .bar-label-amount {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(9px, 1.5vw, 12px);
+    font-weight: 600;
+    fill: var(--ink);
+  }
+
+  .bar-label-caption {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(8px, 1.2vw, 10px);
+    font-weight: 300;
+    fill: var(--ink);
+    opacity: 0.85;
+  }
+
+  .total-line {
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    opacity: 0.8;
+  }
+
+  .total-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    fill: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .matter-divider {
+    stroke: var(--bone);
+    stroke-width: 1;
+    stroke-opacity: 0.1;
+    stroke-dasharray: 2 4;
+  }
+
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 1.5rem auto 0;
+    padding-left: 0;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bone);
+    opacity: 0.8;
+  }
+
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .swatch-madoff  { background: var(--bone); }
+  .swatch-epstein { background: var(--blood); }
+
+  footer {
+    background: var(--bone);
+    color: var(--ink);
+    margin-top: 3rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  footer p.verdict {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(0.95rem, 3vw, 1.3rem);
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    max-width: 640px;
+    margin: 0 auto 0.6rem;
+  }
+
+  footer p.source {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    opacity: 0.55;
+    max-width: 700px;
+    margin: 0 auto;
+    text-transform: uppercase;
+  }
+
+  .gridline {
+    stroke: var(--bone);
+    stroke-opacity: 0.06;
+    stroke-width: 1;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 1.2rem 0.6rem 0; }
+    header { margin-bottom: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>JPMorgan Chase — Settlement Ledger</h1>
+  <p class="subtitle">January 7, 2014 &mdash; September 26, 2023 &nbsp;·&nbsp; Nine years, five months</p>
+</header>
+
+<div id="chart-wrap">
+  <svg id="chart"></svg>
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-swatch swatch-madoff"></div>
+    Madoff matter
+  </div>
+  <div class="legend-item">
+    <div class="legend-swatch swatch-epstein"></div>
+    Epstein matter
+  </div>
+</div>
+
+<footer>
+  <p class="verdict">No individual officer or employee of JPMorgan Chase was criminally charged in connection with either matter.</p>
+  <p class="source">Sources: United States v. JPMorgan Chase Bank N.A., S.D.N.Y.; Picard v. JPMorgan Chase &amp;Co., Adv. Proc. 10-4932; FinCEN Consent Order Jan. 7, 2014; OCC Civil Penalty Jan. 7, 2014; Jane Doe 1 v. JPMorgan Chase Bank N.A., 1:22-cv-10019; Gov't of USVI v. JPMorgan Chase Bank N.A., 1:22-cv-10904.</p>
+</footer>
+
+<script>
+const data = {
+  "total": 3419000000,
+  "instruments": [
+    { "id":1, "date":"2014-01-07", "caption":"DOJ Deferred\nProsecution Agreement",   "matter":"Madoff",  "amount":1700000000, "instrument_type":"Criminal forfeiture" },
+    { "id":2, "date":"2014-01-07", "caption":"Picard Bankruptcy\nTrustee Settlement",  "matter":"Madoff",  "amount":543000000,  "instrument_type":"Civil settlement" },
+    { "id":3, "date":"2014-01-07", "caption":"FinCEN Civil\nMoney Penalty",            "matter":"Madoff",  "amount":461000000,  "instrument_type":"Regulatory penalty" },
+    { "id":4, "date":"2014-01-07", "caption":"OCC Civil\nMoney Penalty",               "matter":"Madoff",  "amount":350000000,  "instrument_type":"Regulatory penalty" },
+    { "id":5, "date":"2023-06-12", "caption":"Jane Doe 1\nClass Action Settlement",    "matter":"Epstein", "amount":290000000,  "instrument_type":"Civil settlement" },
+    { "id":6, "date":"2023-09-26", "caption":"Government of USVI\nSettlement",         "matter":"Epstein", "amount":75000000,   "instrument_type":"Civil settlement" }
+  ]
+};
+
+function fmt(n) {
+  if (n >= 1e9) return "$" + (n / 1e9).toFixed(2).replace(/\.?0+$/, "") + "B";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(0) + "M";
+  return "$" + n.toLocaleString();
+}
+
+function draw() {
+  const container = document.getElementById("chart-wrap");
+  const totalW = container.clientWidth || 900;
+
+  const margin = { top: 60, right: 30, bottom: 60, left: 72 };
+  const width  = totalW - margin.left - margin.right;
+  const height = Math.max(320, Math.min(480, totalW * 0.52));
+
+  d3.select("#chart").selectAll("*").remove();
+
+  const svg = d3.select("#chart")
+    .attr("viewBox", `0 0 ${totalW} ${height + margin.top + margin.bottom}`)
+    .attr("preserveAspectRatio", "xMidYMid meet");
+
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Scales
+  const barW = Math.max(30, Math.min(90, width / 9));
+
+  const xPositions = [
+    width * 0.07,
+    width * 0.07 + barW + 8,
+    width * 0.07 + (barW + 8) * 2,
+    width * 0.07 + (barW + 8) * 3,
+    width * 0.72,
+    width * 0.72 + barW + 8
+  ];
+
+  const y = d3.scaleLinear()
+    .domain([0, 1900000000])
+    .range([height, 0]);
+
+  // Gridlines
+  const ticks = [500000000, 1000000000, 1500000000];
+  g.selectAll(".gridline")
+    .data(ticks)
+    .join("line")
+    .attr("class", "gridline")
+    .attr("x1", 0).attr("x2", width)
+    .attr("y1", d => y(d)).attr("y2", d => y(d));
+
+  // Y axis
+  const yAxis = d3.axisLeft(y)
+    .tickValues(ticks)
+    .tickFormat(d => fmt(d))
+    .tickSize(0);
+
+  g.append("g").attr("class", "axis")
+    .call(yAxis)
+    .call(a => a.select(".domain").remove())
+    .call(a => a.selectAll("text").attr("dx", "-0.5em"));
+
+  // Timeline axis labels
+  const timelineY = height + 32;
+  const madoffCenterX = xPositions[0] + ((barW + 8) * 3) / 2 - barW / 2;
+  const epsteinCenterX = xPositions[4] + (barW + 8) / 2;
+
+  g.append("text").attr("class", "axis-label")
+    .attr("x", madoffCenterX).attr("y", timelineY)
+    .attr("text-anchor", "middle")
+    .text("JANUARY 7, 2014");
+
+  g.append("text").attr("class", "axis-label")
+    .attr("x", xPositions[4]).attr("y", timelineY)
+    .attr("text-anchor", "middle")
+    .text("JUNE 12, 2023");
+
+  g.append("text").attr("class", "axis-label")
+    .attr("x", xPositions[5]).attr("y", timelineY)
+    .attr("text-anchor", "middle")
+    .text("SEPT 26, 2023");
+
+  // Timeline base line
+  g.append("line")
+    .attr("x1", 0).attr("x2", width)
+    .attr("y1", height).attr("y2", height)
+    .attr("stroke", "var(--bone)").attr("stroke-opacity", 0.15)
+    .attr("stroke-width", 1);
+
+  // Bars
+  data.instruments.forEach((d, i) => {
+    const x = xPositions[i];
+    const barHeight = height - y(d.amount);
+    const barY = y(d.amount);
+    const cls = d.matter === "Madoff" ? "bar-madoff" : "bar-epstein";
+
+    g.append("rect")
+      .attr("class", cls)
+      .attr("x", x).attr("y", barY)
+      .attr("width", barW).attr("height", barHeight)
+      .attr("rx", 2);
+
+    // Amount label inside bar (top)
+    const amtLabel = fmt(d.amount);
+    const labelY = barY + 14;
+    g.append("text")
+      .attr("class", "bar-label-amount")
+      .attr("x", x + barW / 2).attr("y", labelY)
+      .attr("text-anchor", "middle")
+      .text(amtLabel);
+
+    // Caption lines below bar
+    const lines = d.caption.split("\n");
+    lines.forEach((line, li) => {
+      g.append("text")
+        .attr("class", "bar-label-caption")
+        .attr("x", x + barW / 2)
+        .attr("y", height + 14 + li * 11)
+        .attr("text-anchor", "middle")
+        .text(line);
+    });
+  });
+
+  // Total line
+  const totalY = y(data.total);
+  if (totalY > 0) {
+    g.append("line")
+      .attr("class", "total-line")
+      .attr("x1", 0).attr("x2", width)
+      .attr("y1", totalY).attr("y2", totalY);
+
+    g.append("text")
+      .attr("class", "total-label")
+      .attr("x", width - 4).attr("y", totalY - 6)
+      .attr("text-anchor", "end")
+      .text("TOTAL $3.419B");
+  }
+
+  // Matter group bracket labels
+  const bracketY = -28;
+  const madoffLeft  = xPositions[0];
+  const madoffRight = xPositions[3] + barW;
+  const epsteinLeft  = xPositions[4];
+  const epsteinRight = xPositions[5] + barW;
+
+  [[madoffLeft, madoffRight, "MADOFF MATTER  ·  $3.054B"], [epsteinLeft, epsteinRight, "EPSTEIN MATTER  ·  $365M"]].forEach(([l, r, label]) => {
+    const cx = (l + r) / 2;
+    g.append("line")
+      .attr("x1", l).attr("x2", r)
+      .attr("y1", bracketY).attr("y2", bracketY)
+      .attr("stroke", "var(--gold)").attr("stroke-width", 1).attr("stroke-opacity", 0.6);
+    g.append("text")
+      .attr("x", cx).attr("y", bracketY - 8)
+      .attr("text-anchor", "middle")
+      .attr("font-family", "Oswald, sans-serif")
+      .attr("font-size", "9px")
+      .attr("font-weight", "400")
+      .attr("letter-spacing", "0.08em")
+      .attr("fill", "var(--gold)")
+      .attr("opacity", "0.8")
+      .text(label);
+  });
+}
+
+draw();
+window.addEventListener("resize", draw);
+</script>
+</body>
+</html>
