@@ -1,0 +1,57 @@
+{
+  "title": "JPMorgan Chase — Settlement Ledger",
+  "subtitle": "January 7, 2014 through September 26, 2023",
+  "source": "United States v. JPMorgan Chase Bank N.A., S.D.N.Y.; Picard v. JPMorgan Chase, Adv. Proc. 10-4932; FinCEN Consent Order; OCC Civil Penalty; Jane Doe 1 v. JPMorgan Chase Bank N.A., 1:22-cv-10019; Government of USVI v. JPMorgan Chase Bank N.A., 1:22-cv-10904",
+  "total": 3419000000,
+  "instruments": [
+    {
+      "id": 1,
+      "date": "2014-01-07",
+      "caption": "DOJ Deferred Prosecution Agreement",
+      "matter": "Madoff",
+      "amount": 1700000000,
+      "instrument_type": "Criminal forfeiture"
+    },
+    {
+      "id": 2,
+      "date": "2014-01-07",
+      "caption": "Picard Bankruptcy Trustee Settlement",
+      "matter": "Madoff",
+      "amount": 543000000,
+      "instrument_type": "Civil settlement"
+    },
+    {
+      "id": 3,
+      "date": "2014-01-07",
+      "caption": "FinCEN Civil Money Penalty",
+      "matter": "Madoff",
+      "amount": 461000000,
+      "instrument_type": "Regulatory penalty"
+    },
+    {
+      "id": 4,
+      "date": "2014-01-07",
+      "caption": "OCC Civil Money Penalty",
+      "matter": "Madoff",
+      "amount": 350000000,
+      "instrument_type": "Regulatory penalty"
+    },
+    {
+      "id": 5,
+      "date": "2023-06-12",
+      "caption": "Jane Doe 1 Class Action Settlement",
+      "matter": "Epstein",
+      "amount": 290000000,
+      "instrument_type": "Civil settlement"
+    },
+    {
+      "id": 6,
+      "date": "2023-09-26",
+      "caption": "Government of USVI Settlement",
+      "matter": "Epstein",
+      "amount": 75000000,
+      "instrument_type": "Civil settlement"
+    }
+  ],
+  "note": "No individual officer or employee of JPMorgan Chase was criminally charged in connection with either matter."
+}
