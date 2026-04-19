@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>THE QUIET ROOM — They're Too Busy Marrying Themselves</title>
+<meta name="description" content="Twelve documented artifacts from an eight-hundred-year pattern. Tap any one to read the source.">
+<meta name="theme-color" content="#07060a">
+<meta property="og:title" content="THE QUIET ROOM — Unwarranted Influence">
+<meta property="og:description" content="A primary-source plate. 1095–2026.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700;900&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+/* ======================= OPENING DISSOLVE ======================= */
+/* Black plate fades to reveal the Quiet Room. Matches the corkboard's
+   intro grammar so the reader feels one site, three rooms. */
+#dissolve {
+  position: fixed;
+  inset: 0;
+  background: #040308;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: dissolveOut 2.4s cubic-bezier(.4,.0,.2,1) 0.6s forwards;
+  pointer-events: none;
+}
+
+#dissolve .dissolve-mark {
+  font-family: "Anton", sans-serif;
+  color: #e8a13b;
+  letter-spacing: 0.5em;
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: dissolveText 2s ease-out 0.2s forwards;
+}
+
+@keyframes dissolveOut {
+  0%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes dissolveText {
+  0%   { opacity: 0; letter-spacing: 0.3em; }
+  40%  { opacity: 1; letter-spacing: 0.5em; }
+  80%  { opacity: 1; letter-spacing: 0.5em; }
+  100% { opacity: 0; letter-spacing: 0.7em; }
+}
+
+/* =====================================================================
+   THE QUIET ROOM
+   Middle leg between doom scroll and corkboard.
+   Ventura chiaroscuro + Alex Grey cosmic anatomy, hand-authored.
+   No generated imagery. Every mark is SVG or CSS.
+   Palette/type matched to banksy_corkboard for visual continuity.
+   ===================================================================== */
+
+:root {
+  --obey-red:       #d71920;
+  --obey-red-dark:  #8b0000;
+  --obey-cream:     #f4e9d5;
+  --obey-black:     #07060a;
+
+  --paper-fbi:      #c4b89a;
+  --paper-aged:     #d4cfc4;
+  --paper-torn:     #e8ddc4;
+
+  --stamp-red:      #b91c1c;
+  --ink-type:       #1e1d1b;
+
+  --chiaro-black:   #040308;
+  --chiaro-umber:   #1a0f07;
+  --chiaro-amber:   #c87b1a;
+  --chiaro-gold:    #e8a13b;
+  --chiaro-ember:   #ff6b1a;
+
+  --cosmic-violet:  #4a2b6b;
+  --cosmic-indigo:  #1e2d5a;
+  --cosmic-plasma:  #d4a843;
+  --cosmic-white:   #fff4d6;
+  --cosmic-blood:   #8b2323;
+
+  --breath:         6s;
+  --pulse:          3.2s;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--chiaro-black);
+  color: var(--obey-cream);
+  font-family: "Special Elite", "Courier Prime", monospace;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 78% 38%, rgba(232,161,59,0.14), transparent 55%),
+    radial-gradient(ellipse 120% 90% at 50% 50%, rgba(26,15,7,0.55), transparent 70%),
+    radial-gradient(ellipse 140% 100% at 50% 120%, #0a0608 0%, transparent 60%),
+    linear-gradient(180deg, #07060a 0%, #0a0708 40%, #050308 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.09  0 0 0 0 0.06  0 0 0 0.42 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ======================= HEADER PLATE ======================= */
+header.plate {
+  position: relative;
+  z-index: 10;
+  padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 40px) clamp(16px, 3vw, 32px);
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: "Anton", sans-serif;
+  color: var(--obey-red);
+  letter-spacing: 0.42em;
+  font-size: clamp(10px, 2.4vw, 13px);
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 18px;
+}
+
+h1.title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--obey-cream);
+  font-size: clamp(28px, 7.2vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.6), 0 0 40px rgba(232,161,59,0.08);
+}
+
+h1.title em { color: var(--chiaro-gold); font-style: italic; }
+
+.subtitle {
+  margin-top: 18px;
+  font-family: "Special Elite", monospace;
+  color: var(--paper-fbi);
+  font-size: clamp(11px, 2.4vw, 13px);
+  letter-spacing: 0.12em;
+  line-height: 1.6;
+  opacity: 0.82;
+}
+
+.rule {
+  margin: 26px auto 0;
+  width: 90px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--obey-red), transparent);
+  opacity: 0.7;
+}
+
+.dateline {
+  margin-top: 22px;
+  font-family: "Courier Prime", monospace;
+  color: var(--paper-fbi);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+/* ======================= THE PLATE ======================= */
+.stage {
+  position: relative;
+  z-index: 5;
+  width: min(100%, 980px);
+  margin: clamp(8px, 2vw, 24px) auto 0;
+  aspect-ratio: 1 / 1.02;
+}
+
+.stage svg.plate-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes breath {
+  0%, 100% { transform: scale(1.0); }
+  50%      { transform: scale(1.018); }
+}
+
+.artifacts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.artifact {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  transition: transform 240ms cubic-bezier(.2,.7,.2,1), filter 240ms;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.artifact:hover,
+.artifact:focus-visible {
+  transform: translate(-50%, -50%) scale(1.08);
+  filter: drop-shadow(0 0 18px rgba(232,161,59,0.55));
+  outline: none;
+}
+
+.artifact .tag {
+  display: block;
+  font-family: "Anton", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--obey-cream);
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 6px;
+  opacity: 0.82;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.9);
+  white-space: nowrap;
+}
+
+.artifact .node {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--chiaro-gold) 0%, var(--chiaro-amber) 40%, var(--chiaro-umber) 100%);
+  border: 1.5px solid rgba(255,220,150,0.35);
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,0.5),
+    0 0 22px rgba(232,161,59,0.35),
+    inset 0 -4px 10px rgba(0,0,0,0.45),
+    inset 0 4px 10px rgba(255,230,170,0.25);
+  position: relative;
+  margin: 0 auto;
+  animation: nodePulse var(--pulse) ease-in-out infinite;
+}
+
+.artifact .node::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,161,59,0.18);
+  animation: nodeRing 4.8s ease-in-out infinite;
+}
+
+.artifact .node .glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Anton", sans-serif;
+  font-size: 20px;
+  color: var(--obey-black);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 0 rgba(255,220,150,0.6);
+}
+
+@keyframes nodePulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(0,0,0,0.5), 0 0 22px rgba(232,161,59,0.35), inset 0 -4px 10px rgba(0,0,0,0.45), inset 0 4px 10px rgba(255,230,170,0.25); }
+  50%      { box-shadow: 0 0 0 3px rgba(0,0,0,0.5), 0 0 36px rgba(232,161,59,0.6),  inset 0 -4px 10px rgba(0,0,0,0.45), inset 0 4px 10px rgba(255,230,170,0.35); }
+}
+
+@keyframes nodeRing {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%      { transform: scale(1.18); opacity: 0.0; }
+}
+
+.artifact.victim .node {
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, var(--cosmic-white) 0%, rgba(255,244,214,0.4) 40%, transparent 80%);
+  border: none;
+  box-shadow: 0 0 16px rgba(255,244,214,0.6);
+  animation: victimPulse 5.4s ease-in-out infinite;
+}
+
+.artifact.victim .node::before { display: none; }
+.artifact.victim .node .glyph { display: none; }
+.artifact.victim .tag {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--cosmic-white);
+  opacity: 0.55;
+  margin-top: 4px;
+}
+
+@keyframes victimPulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.95); }
+  50%      { opacity: 0.85; transform: scale(1.08); }
+}
+
+/* ======================= STATEMENT ======================= */
+.statement {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: clamp(24px, 5vw, 48px) auto clamp(24px, 5vw, 40px);
+  padding: 0 clamp(20px, 5vw, 32px);
+  text-align: center;
+}
+
+.statement blockquote {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(16px, 3.4vw, 22px);
+  line-height: 1.45;
+  color: var(--obey-cream);
+  text-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+.statement blockquote::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--obey-red);
+  margin: 0 auto 24px;
+  opacity: 0.6;
+}
+
+.statement cite {
+  display: block;
+  margin-top: 18px;
+  font-family: "Special Elite", monospace;
+  font-style: normal;
+  color: var(--paper-fbi);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ======================= MANIFEST GRID ======================= */
+.manifest {
+  position: relative;
+  z-index: 10;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) clamp(48px, 8vw, 80px);
+}
+
+.manifest-header {
+  text-align: center;
+  margin-bottom: clamp(24px, 5vw, 40px);
+}
+
+.manifest-header .label {
+  font-family: "Anton", sans-serif;
+  color: var(--obey-red);
+  letter-spacing: 0.4em;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.manifest-header h2 {
+  margin-top: 10px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 900;
+  color: var(--obey-cream);
+  font-size: clamp(22px, 4.6vw, 32px);
+}
+
+.manifest-header .hint {
+  margin-top: 14px;
+  font-family: "Courier Prime", monospace;
+  color: var(--paper-fbi);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  opacity: 0.65;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: clamp(12px, 2.5vw, 20px);
+}
+
+.card {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(232,161,59,0.07), transparent 60%),
+    linear-gradient(155deg, #13100c 0%, #0a0807 100%);
+  border: 1px solid rgba(196,184,154,0.12);
+  padding: 18px 18px 16px;
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(.2,.7,.2,1), border-color 220ms, background 220ms;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  font-family: inherit;
+  width: 100%;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(232,161,59,0.35);
+  outline: none;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, transparent 50%, rgba(215,25,32,0.6) 50%);
+}
+
+.card .n {
+  font-family: "Courier Prime", monospace;
+  color: var(--obey-red);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  margin-bottom: 8px;
+}
+
+.card h3 {
+  font-family: "Anton", sans-serif;
+  color: var(--obey-cream);
+  font-size: clamp(16px, 3vw, 19px);
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.card .excerpt {
+  font-family: "Special Elite", monospace;
+  color: var(--paper-fbi);
+  font-size: 12.5px;
+  line-height: 1.55;
+  opacity: 0.82;
+  margin-bottom: 12px;
+}
+
+.card .meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(196,184,154,0.18);
+  font-family: "Courier Prime", monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--paper-fbi);
+  opacity: 0.72;
+  text-transform: uppercase;
+}
+
+.card.victim {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,244,214,0.05), transparent 60%),
+    linear-gradient(155deg, #0b0a0d 0%, #060508 100%);
+  border-color: rgba(255,244,214,0.1);
+}
+
+.card.victim::before {
+  background: linear-gradient(135deg, transparent 50%, rgba(255,244,214,0.3) 50%);
+}
+
+.card.victim .n { color: var(--cosmic-white); opacity: 0.6; }
+.card.victim h3 { color: var(--cosmic-white); }
+
+/* ======================= MODAL ======================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 32px);
+  animation: modalIn 200ms ease-out;
+}
+
+.modal.open { display: flex; }
+
+@keyframes modalIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-body {
+  max-width: 680px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, var(--paper-aged) 0%, var(--paper-fbi) 100%);
+  color: var(--ink-type);
+  padding: clamp(24px, 5vw, 40px);
+  border: 1px solid rgba(30,29,27,0.4);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(184,160,112,0.3);
+  position: relative;
+  font-family: "Courier Prime", monospace;
+}
+
+.modal-body::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 60px;
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--stamp-red);
+  border-radius: 50%;
+  opacity: 0.25;
+  background: radial-gradient(circle, transparent 55%, var(--stamp-red) 56%, transparent 58%);
+  pointer-events: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: var(--obey-black);
+  color: var(--obey-cream);
+  border: none;
+  cursor: pointer;
+  font-family: "Anton", sans-serif;
+  font-size: 18px;
+  line-height: 36px;
+  z-index: 2;
+}
+
+.modal-body .m-kicker {
+  font-family: "Anton", sans-serif;
+  color: var(--stamp-red);
+  letter-spacing: 0.35em;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.modal-body h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-size: clamp(20px, 4vw, 28px);
+  line-height: 1.15;
+  color: var(--ink-type);
+  margin-bottom: 14px;
+}
+
+.modal-body .m-rule {
+  height: 1px;
+  background: rgba(30,29,27,0.25);
+  margin: 14px 0 18px;
+}
+
+.modal-body .m-body {
+  font-family: "Special Elite", monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-type);
+  white-space: pre-wrap;
+}
+
+.modal-body .m-source {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(30,29,27,0.2);
+  font-family: "Courier Prime", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-type);
+}
+
+.modal-body .m-source .src-label {
+  display: inline-block;
+  background: var(--ink-type);
+  color: var(--paper-torn);
+  padding: 2px 8px;
+  margin-right: 8px;
+  margin-bottom: 6px;
+  letter-spacing: 0.25em;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.modal-body .m-chapter {
+  margin-top: 14px;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 0.3em;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--stamp-red);
+}
+
+/* ======================= FOOTER ======================= */
+footer.crosswalks {
+  position: relative;
+  z-index: 10;
+  padding: clamp(32px, 6vw, 60px) clamp(16px, 4vw, 32px);
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer .crosswalk-links {
+  display: flex;
+  gap: clamp(10px, 2vw, 20px);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+footer a {
+  display: inline-block;
+  padding: 12px 20px;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 0.22em;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--obey-cream);
+  text-decoration: none;
+  border: 1px solid rgba(196,184,154,0.25);
+  background: rgba(232,161,59,0.04);
+  transition: all 200ms;
+}
+
+footer a:hover {
+  background: rgba(215,25,32,0.1);
+  border-color: var(--obey-red);
+}
+
+footer .colophon {
+  margin-top: 32px;
+  font-family: "Courier Prime", monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--paper-fbi);
+  opacity: 0.5;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .artifact .node { width: 40px; height: 40px; }
+  .artifact .node .glyph { font-size: 15px; }
+  .artifact .tag { font-size: 8.5px; letter-spacing: 0.15em; }
+  .artifact.victim .node { width: 12px; height: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= OPENING DISSOLVE ======================= -->
+<div id="dissolve" aria-hidden="true">
+  <div class="dissolve-mark">Unwarranted Influence · 1095 – 2026</div>
+</div>
+
+<header class="plate">
+  <div class="kicker">An interactive companion · 1095 – 2026</div>
+  <h1 class="title">The Quiet <em>Room</em></h1>
+  <div class="rule"></div>
+  <p class="subtitle">
+    Twelve documented artifacts from eight hundred years of the same play.<br>
+    No generated images. No composites. Tap any point to read the source.
+  </p>
+  <div class="dateline">Companion to <em>They're Too Busy Marrying Themselves</em> · K. Jimenez</div>
+</header>
+
+<!-- ======================= THE PLATE ======================= -->
+<div class="stage" id="stage" role="img" aria-label="A mandala of primary sources. Twelve tappable nodes orbit a central hand motif holding a glowing document stack.">
+
+  <svg class="plate-svg" viewBox="0 0 1000 1020" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+
+      <radialGradient id="chiaroLight" cx="72%" cy="38%" r="72%">
+        <stop offset="0%"  stop-color="#ffb560" stop-opacity="0.22"/>
+        <stop offset="28%" stop-color="#c87b1a" stop-opacity="0.14"/>
+        <stop offset="60%" stop-color="#1a0f07" stop-opacity="0.0"/>
+        <stop offset="100%" stop-color="#040308" stop-opacity="0.0"/>
+      </radialGradient>
+
+      <radialGradient id="frameVignette" cx="50%" cy="50%" r="62%">
+        <stop offset="60%" stop-color="#040308" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#040308" stop-opacity="0.95"/>
+      </radialGradient>
+
+      <radialGradient id="coreBloom" cx="50%" cy="44%" r="50%">
+        <stop offset="0%"  stop-color="#fff4d6" stop-opacity="0.9"/>
+        <stop offset="15%" stop-color="#e8a13b" stop-opacity="0.7"/>
+        <stop offset="40%" stop-color="#8b2323" stop-opacity="0.55"/>
+        <stop offset="70%" stop-color="#4a2b6b" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#040308" stop-opacity="0"/>
+      </radialGradient>
+
+      <linearGradient id="thread" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"  stop-color="#b91c1c" stop-opacity="0.0"/>
+        <stop offset="50%" stop-color="#b91c1c" stop-opacity="0.75"/>
+        <stop offset="100%" stop-color="#b91c1c" stop-opacity="0.0"/>
+      </linearGradient>
+
+      <radialGradient id="docGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"  stop-color="#ffe6b0" stop-opacity="1.0"/>
+        <stop offset="60%" stop-color="#c87b1a" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#1a0f07" stop-opacity="0.0"/>
+      </radialGradient>
+
+      <pattern id="paperLines" width="4" height="4" patternUnits="userSpaceOnUse">
+        <rect width="4" height="4" fill="#f4e9d5"/>
+        <line x1="0" y1="2" x2="4" y2="2" stroke="#1e1d1b" stroke-width="0.2" opacity="0.3"/>
+      </pattern>
+
+      <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <filter id="hardGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="14" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <filter id="wobble">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7"/>
+        <feDisplacementMap in="SourceGraphic" scale="2.8"/>
+      </filter>
+
+    </defs>
+
+    <rect x="0" y="0" width="1000" height="1020" fill="#040308"/>
+    <rect x="0" y="0" width="1000" height="1020" fill="url(#chiaroLight)"/>
+
+    <!-- =================== SACRED GEOMETRY — BACK LAYER =================== -->
+    <g transform="translate(500 480)" opacity="0.55" filter="url(#wobble)">
+
+      <g stroke="#8b2323" stroke-width="0.6" fill="none" opacity="0.4">
+        <circle r="460"/>
+        <circle r="420"/>
+      </g>
+
+      <g stroke="#c87b1a" stroke-width="0.5" fill="none" opacity="0.5">
+        <circle r="360"/>
+        <circle r="300"/>
+        <circle r="240"/>
+        <circle r="180"/>
+        <circle r="120"/>
+      </g>
+
+      <g stroke="#c87b1a" stroke-width="0.4" opacity="0.35">
+        <line x1="0" y1="-460" x2="0" y2="460"/>
+        <line x1="-460" y1="0" x2="460" y2="0"/>
+        <line x1="-325" y1="-325" x2="325" y2="325"/>
+        <line x1="-325" y1="325" x2="325" y2="-325"/>
+        <line x1="-230" y1="-398" x2="230" y2="398"/>
+        <line x1="230" y1="-398" x2="-230" y2="398"/>
+        <line x1="-398" y1="-230" x2="398" y2="230"/>
+        <line x1="398" y1="-230" x2="-398" y2="230"/>
+      </g>
+
+      <!-- Flower-of-life intersecting circles — Grey's intertwine grammar -->
+      <g stroke="#e8a13b" stroke-width="0.5" fill="none" opacity="0.28">
+        <circle r="120" cx="0" cy="0"/>
+        <circle r="120" cx="120" cy="0"/>
+        <circle r="120" cx="-120" cy="0"/>
+        <circle r="120" cx="60" cy="104"/>
+        <circle r="120" cx="-60" cy="104"/>
+        <circle r="120" cx="60" cy="-104"/>
+        <circle r="120" cx="-60" cy="-104"/>
+        <circle r="120" cx="208" cy="0"/>
+        <circle r="120" cx="-208" cy="0"/>
+        <circle r="120" cx="104" cy="180"/>
+        <circle r="120" cx="-104" cy="180"/>
+        <circle r="120" cx="104" cy="-180"/>
+        <circle r="120" cx="-104" cy="-180"/>
+      </g>
+
+      <!-- Vesica piscis triad, rotated, painterly -->
+      <g stroke="#fff4d6" stroke-width="0.35" fill="none" opacity="0.22">
+        <ellipse rx="180" ry="90" transform="rotate(0)"/>
+        <ellipse rx="180" ry="90" transform="rotate(60)"/>
+        <ellipse rx="180" ry="90" transform="rotate(120)"/>
+      </g>
+
+    </g>
+
+    <!-- =================== CORE BLOOM =================== -->
+    <g transform="translate(500 470)">
+
+      <circle r="210" fill="url(#coreBloom)" filter="url(#hardGlow)">
+        <animate attributeName="r" values="204;220;204" dur="6s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- Radiating "bone" lines — could read as cranial striation, crown, or mushroom bloom -->
+      <g stroke="#fff4d6" stroke-width="0.6" opacity="0.42" fill="none">
+        <g transform="rotate(0)"><line x1="0" y1="-180" x2="0" y2="-120"/></g>
+        <g transform="rotate(15)"><line x1="0" y1="-190" x2="0" y2="-130"/></g>
+        <g transform="rotate(30)"><line x1="0" y1="-200" x2="0" y2="-110"/></g>
+        <g transform="rotate(45)"><line x1="0" y1="-185" x2="0" y2="-125"/></g>
+        <g transform="rotate(60)"><line x1="0" y1="-195" x2="0" y2="-115"/></g>
+        <g transform="rotate(75)"><line x1="0" y1="-180" x2="0" y2="-130"/></g>
+        <g transform="rotate(90)"><line x1="0" y1="-205" x2="0" y2="-120"/></g>
+        <g transform="rotate(105)"><line x1="0" y1="-185" x2="0" y2="-125"/></g>
+        <g transform="rotate(120)"><line x1="0" y1="-200" x2="0" y2="-110"/></g>
+        <g transform="rotate(135)"><line x1="0" y1="-180" x2="0" y2="-130"/></g>
+        <g transform="rotate(150)"><line x1="0" y1="-195" x2="0" y2="-115"/></g>
+        <g transform="rotate(165)"><line x1="0" y1="-185" x2="0" y2="-125"/></g>
+        <g transform="rotate(180)"><line x1="0" y1="-200" x2="0" y2="-110"/></g>
+        <g transform="rotate(195)"><line x1="0" y1="-180" x2="0" y2="-130"/></g>
+        <g transform="rotate(210)"><line x1="0" y1="-195" x2="0" y2="-115"/></g>
+        <g transform="rotate(225)"><line x1="0" y1="-185" x2="0" y2="-125"/></g>
+        <g transform="rotate(240)"><line x1="0" y1="-200" x2="0" y2="-110"/></g>
+        <g transform="rotate(255)"><line x1="0" y1="-180" x2="0" y2="-130"/></g>
+        <g transform="rotate(270)"><line x1="0" y1="-195" x2="0" y2="-115"/></g>
+        <g transform="rotate(285)"><line x1="0" y1="-185" x2="0" y2="-125"/></g>
+        <g transform="rotate(300)"><line x1="0" y1="-200" x2="0" y2="-110"/></g>
+        <g transform="rotate(315)"><line x1="0" y1="-180" x2="0" y2="-130"/></g>
+        <g transform="rotate(330)"><line x1="0" y1="-195" x2="0" y2="-115"/></g>
+        <g transform="rotate(345)"><line x1="0" y1="-185" x2="0" y2="-125"/></g>
+      </g>
+
+      <!-- Eight centuries, rotated to face center -->
+      <g font-family="Courier Prime, monospace" font-size="11" fill="#f4e9d5" opacity="0.62" letter-spacing="2">
+        <text x="0" y="-250" text-anchor="middle">1095</text>
+        <text x="176" y="-176" text-anchor="middle" transform="rotate(45 176 -176)">1307</text>
+        <text x="250" y="0"  text-anchor="middle" transform="rotate(90 250 0)">1517</text>
+        <text x="176" y="176" text-anchor="middle" transform="rotate(135 176 176)">1776</text>
+        <text x="0" y="260"  text-anchor="middle">1913</text>
+        <text x="-176" y="176" text-anchor="middle" transform="rotate(-135 -176 176)">1942</text>
+        <text x="-250" y="0"  text-anchor="middle" transform="rotate(-90 -250 0)">1991</text>
+        <text x="-176" y="-176" text-anchor="middle" transform="rotate(-45 -176 -176)">2001</text>
+      </g>
+
+      <!-- Inner mandala — painterly figure-eights, Grey's intertwine -->
+      <g stroke="#fff4d6" stroke-width="0.5" opacity="0.5" fill="none">
+        <path d="M 0,-140 Q 70,-70 0,0 Q -70,70 0,140 Q 70,70 0,0 Q -70,-70 0,-140 Z"/>
+        <path d="M -140,0 Q -70,70 0,0 Q 70,-70 140,0 Q 70,70 0,0 Q -70,-70 -140,0 Z"/>
+        <path d="M 0,-140 Q 99,-99 140,0 Q 99,99 0,140 Q -99,99 -140,0 Q -99,-99 0,-140 Z"/>
+      </g>
+
+    </g>
+
+    <!-- =================== THREADS — corkboard string as energy channel =================== -->
+    <g stroke="url(#thread)" stroke-width="1.2" fill="none" opacity="0.55" stroke-linecap="round">
+      <path d="M 500,480 Q 530,340 600,180" />
+      <path d="M 500,480 Q 650,360 800,300" />
+      <path d="M 500,480 Q 720,460 890,520" />
+      <path d="M 500,480 Q 700,620 820,780" />
+      <path d="M 500,480 Q 580,700 620,870" />
+      <path d="M 500,480 Q 450,720 320,870" />
+      <path d="M 500,480 Q 310,620 150,760" />
+      <path d="M 500,480 Q 240,540 90,520" />
+      <path d="M 500,480 Q 240,400 150,290" />
+      <path d="M 500,480 Q 310,280 360,150" />
+    </g>
+
+    <!-- =================== HAND + DOCUMENT STACK =================== -->
+    <g transform="translate(500 650)" style="animation: breath var(--breath) ease-in-out infinite; transform-origin: 500px 650px;">
+
+      <!-- Document halo -->
+      <ellipse cx="0" cy="-40" rx="170" ry="52" fill="url(#docGlow)" opacity="0.9"/>
+
+      <!-- Back sheet -->
+      <g transform="rotate(-8) translate(-10 -28)">
+        <rect x="-130" y="-70" width="260" height="96" fill="url(#paperLines)" stroke="#1e1d1b" stroke-width="0.4" opacity="0.85"/>
+        <line x1="-110" y1="-50" x2="60" y2="-50" stroke="#1e1d1b" stroke-width="0.5" opacity="0.6"/>
+        <line x1="-110" y1="-36" x2="80" y2="-36" stroke="#1e1d1b" stroke-width="0.5" opacity="0.5"/>
+        <line x1="-110" y1="-22" x2="40" y2="-22" stroke="#1e1d1b" stroke-width="0.5" opacity="0.5"/>
+        <line x1="-110" y1="-8"  x2="70" y2="-8"  stroke="#1e1d1b" stroke-width="0.5" opacity="0.5"/>
+        <line x1="-110" y1="6"   x2="30" y2="6"   stroke="#1e1d1b" stroke-width="0.5" opacity="0.5"/>
+      </g>
+
+      <!-- Middle sheet with redaction bars -->
+      <g transform="rotate(3) translate(6 -44)">
+        <rect x="-130" y="-70" width="260" height="96" fill="url(#paperLines)" stroke="#1e1d1b" stroke-width="0.4" opacity="0.9"/>
+        <rect x="-120" y="-62" width="40" height="9" fill="#b91c1c" opacity="0.9"/>
+        <rect x="-70"  y="-62" width="84" height="9" fill="#0a0a0a" opacity="0.9"/>
+        <line x1="-110" y1="-36" x2="80" y2="-36" stroke="#1e1d1b" stroke-width="0.5" opacity="0.6"/>
+        <line x1="-110" y1="-22" x2="60" y2="-22" stroke="#1e1d1b" stroke-width="0.5" opacity="0.55"/>
+        <line x1="-110" y1="-8"  x2="90" y2="-8"  stroke="#1e1d1b" stroke-width="0.5" opacity="0.55"/>
+        <line x1="-110" y1="6"   x2="40" y2="6"   stroke="#1e1d1b" stroke-width="0.5" opacity="0.55"/>
+      </g>
+
+      <!-- Front sheet — Vesting Order 248, readable -->
+      <g transform="translate(0 -60)">
+        <rect x="-132" y="-72" width="264" height="100" fill="#f4e9d5" stroke="#1e1d1b" stroke-width="0.6"/>
+        <text x="0" y="-52" text-anchor="middle" font-family="Anton, sans-serif" font-size="11" fill="#b91c1c" letter-spacing="3">VESTING ORDER No. 248</text>
+        <text x="0" y="-38" text-anchor="middle" font-family="Courier Prime, monospace" font-size="8.5" fill="#1e1d1b" letter-spacing="1.2">Office of Alien Property Custodian · Oct. 20, 1942</text>
+        <rect x="-108" y="-28" width="80" height="6" fill="#0a0a0a"/>
+        <rect x="-22"  y="-28" width="52" height="6" fill="#0a0a0a"/>
+        <rect x="36"   y="-28" width="70" height="6" fill="#0a0a0a"/>
+        <rect x="-108" y="-16" width="60" height="6" fill="#0a0a0a"/>
+        <rect x="-42"  y="-16" width="100" height="6" fill="#0a0a0a"/>
+        <rect x="64"   y="-16" width="42" height="6" fill="#0a0a0a"/>
+        <circle cx="92" cy="10" r="18" fill="none" stroke="#b91c1c" stroke-width="1.2" opacity="0.75"/>
+        <text x="92" y="13" text-anchor="middle" font-family="Anton, sans-serif" font-size="7" fill="#b91c1c" letter-spacing="1.5">SEIZED</text>
+      </g>
+
+      <!-- HAND — Grey-grammar anatomy, rising from below -->
+      <g opacity="0.95">
+
+        <!-- Palm -->
+        <path d="M -95,36 Q -108,92 -80,126 Q -40,146 20,144 Q 82,140 108,114 Q 122,82 108,36 Z"
+              fill="#1a0f07" stroke="#c87b1a" stroke-width="1.2"/>
+
+        <!-- Thumb -->
+        <path d="M -95,40 Q -132,22 -130,-12 Q -118,-34 -98,-22 Q -90,-2 -88,32 Z"
+              fill="#1a0f07" stroke="#c87b1a" stroke-width="1.1"/>
+
+        <!-- Index -->
+        <path d="M -60,34 Q -66,-16 -56,-44 Q -42,-62 -30,-42 Q -28,-6 -32,32 Z"
+              fill="#1a0f07" stroke="#c87b1a" stroke-width="1.1"/>
+
+        <!-- Middle — longest, reaches into the halo -->
+        <path d="M -22,32 Q -24,-28 -14,-64 Q 0,-82 14,-64 Q 16,-24 10,30 Z"
+              fill="#1a0f07" stroke="#c87b1a" stroke-width="1.1"/>
+
+        <!-- Ring -->
+        <path d="M 22,30 Q 26,-22 38,-50 Q 52,-62 60,-46 Q 60,-6 52,28 Z"
+              fill="#1a0f07" stroke="#c87b1a" stroke-width="1.1"/>
+
+        <!-- Pinky -->
+        <path d="M 58,32 Q 66,-4 80,-22 Q 94,-28 98,-10 Q 96,20 88,34 Z"
+              fill="#1a0f07" stroke="#c87b1a" stroke-width="1.1"/>
+
+        <!-- Knuckle energy points -->
+        <g fill="#e8a13b" opacity="0.75">
+          <circle cx="-110" cy="4" r="2.2"/>
+          <circle cx="-48" cy="-12" r="2"/>
+          <circle cx="-2" cy="-18" r="2.4"/>
+          <circle cx="42" cy="-10" r="2"/>
+          <circle cx="86" cy="6" r="1.8"/>
+        </g>
+
+        <!-- Palm tendons as sacred geometry -->
+        <g stroke="#c87b1a" stroke-width="0.5" fill="none" opacity="0.5">
+          <path d="M -70,100 Q -40,74 -8,64"/>
+          <path d="M -8,64 Q 22,84 62,100"/>
+          <path d="M -8,64 L -8,128"/>
+          <path d="M -42,112 Q -8,104 22,112"/>
+        </g>
+
+        <!-- Wrist pulse -->
+        <circle cx="0" cy="134" r="3" fill="#e8a13b" opacity="0.55"/>
+      </g>
+
+    </g>
+
+    <!-- Overlay vignette last -->
+    <rect x="0" y="0" width="1000" height="1020" fill="url(#frameVignette)"/>
+
+    <!-- Plate title cartouche -->
+    <g transform="translate(500 990)" opacity="0.55">
+      <line x1="-140" y1="0" x2="-28" y2="0" stroke="#c87b1a" stroke-width="0.6"/>
+      <line x1="28"  y1="0" x2="140" y2="0" stroke="#c87b1a" stroke-width="0.6"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Anton, sans-serif" font-size="10" fill="#e8a13b" letter-spacing="6">THE QUIET ROOM</text>
+    </g>
+
+  </svg>
+
+  <!-- =================== TAPPABLE ORBITAL NODES =================== -->
+  <!-- Positions are tuned as percentages to align with the SVG composition. -->
+  <div class="artifacts" id="artifacts">
+
+    <button type="button" class="artifact" style="top:12%; left:48%;" data-id="vesting" aria-label="Vesting Order 248">
+      <div class="node"><span class="glyph">V</span></div>
+      <span class="tag">Vesting<br>Order</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:18%; left:68%;" data-id="cia" aria-label="CIA dispatch 1035-960">
+      <div class="node"><span class="glyph">D</span></div>
+      <span class="tag">CIA<br>Dispatch</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:34%; left:82%;" data-id="wexner" aria-label="Wexner POA 1991">
+      <div class="node"><span class="glyph">P</span></div>
+      <span class="tag">Wexner<br>POA</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:50%; left:88%;" data-id="oge" aria-label="OGE Form 278e">
+      <div class="node"><span class="glyph">$</span></div>
+      <span class="tag">OGE<br>278e</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:66%; left:82%;" data-id="jpm" aria-label="JPMorgan DDR court filing">
+      <div class="node"><span class="glyph">J</span></div>
+      <span class="tag">JPM<br>DDR</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:80%; left:66%;" data-id="apollo" aria-label="Apollo 10-Q 235 hospitals">
+      <div class="node"><span class="glyph">A</span></div>
+      <span class="tag">Apollo<br>10-Q</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:80%; left:32%;" data-id="monsanto" aria-label="Monsanto Johnson verdict">
+      <div class="node"><span class="glyph">R</span></div>
+      <span class="tag">Roundup<br>Verdict</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:66%; left:16%;" data-id="mittelwerk" aria-label="Mittelwerk mortality">
+      <div class="node"><span class="glyph">M</span></div>
+      <span class="tag">Mittelwerk<br>Mortality</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:50%; left:10%;" data-id="flight" aria-label="Epstein flight logs">
+      <div class="node"><span class="glyph">F</span></div>
+      <span class="tag">Flight<br>Logs</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:34%; left:16%;" data-id="orr" aria-label="HHS ORR 85,000 children">
+      <div class="node"><span class="glyph">O</span></div>
+      <span class="tag">ORR<br>85,000</span>
+    </button>
+
+    <button type="button" class="artifact" style="top:18%; left:30%;" data-id="gaza" aria-label="Gaza Reconstruction Board">
+      <div class="node"><span class="glyph">G</span></div>
+      <span class="tag">Gaza<br>Board</span>
+    </button>
+
+    <!-- 12th orbital node — the authorial mark. Prison ID as cover motif, without depicting it. -->
+    <button type="button" class="artifact" style="top:26%; left:50%;" data-id="author" aria-label="Author's mark — the prison ID">
+      <div class="node"><span class="glyph">·</span></div>
+      <span class="tag">The Mark</span>
+    </button>
+
+    <!-- VICTIM NODES — negative space -->
+    <button type="button" class="artifact victim" style="top:42%; left:30%;" data-id="victims_orr"  aria-label="85,000 children, ORR">
+      <div class="node"></div><span class="tag">85,000</span>
+    </button>
+    <button type="button" class="artifact victim" style="top:56%; left:72%;" data-id="victims_flight" aria-label="Minors on flight logs">
+      <div class="node"></div><span class="tag">Flight<br>Minors</span>
+    </button>
+    <button type="button" class="artifact victim" style="top:70%; left:48%;" data-id="victims_gaza" aria-label="Gaza child casualties">
+      <div class="node"></div><span class="tag">Gaza</span>
+    </button>
+    <button type="button" class="artifact victim" style="top:38%; left:68%;" data-id="victims_roundup" aria-label="Roundup plaintiffs">
+      <div class="node"></div><span class="tag">Cancer<br>Plaintiffs</span>
+    </button>
+
+  </div>
+</div>
+
+<!-- ======================= STATEMENT ======================= -->
+<section class="statement">
+  <blockquote>
+    Nobody cheers for the mascot. They cheer for the quarterback.
+    <br>This is a book about the quarterbacks.
+  </blockquote>
+  <cite>— Author's note</cite>
+</section>
+
+<!-- ======================= MANIFEST ======================= -->
+<section class="manifest">
+
+  <div class="manifest-header">
+    <div class="label">Manifest · Sources</div>
+    <h2>Every piece opens to a primary document.</h2>
+    <div class="hint">Tap any card to read the source. No commentary added.</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ======================= HANDOFF TO CORKBOARD ======================= -->
+<footer class="crosswalks">
+
+  <div style="max-width: 680px; margin: 0 auto clamp(28px, 5vw, 44px); padding: 0 clamp(20px, 5vw, 32px); text-align: center;">
+    <div style="font-family: 'Anton', sans-serif; color: var(--obey-red); letter-spacing: 0.42em; font-size: 11px; text-transform: uppercase; margin-bottom: 20px;">You've seen the plate</div>
+    <p style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; font-size: clamp(15px, 3vw, 19px); line-height: 1.5; color: var(--obey-cream); opacity: 0.92;">
+      Twelve artifacts cannot hold eight centuries.<br>
+      The wall behind this room has ninety-three people,<br>
+      forty-five institutions, and every string between them.
+    </p>
+    <p style="margin-top: 16px; font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 0.15em; color: var(--paper-fbi); opacity: 0.7;">
+      Pull the strings yourself.
+    </p>
+  </div>
+
+  <div class="crosswalk-links">
+    <a href="index.html">← Back to entry</a>
+    <a href="corkboard.html" style="background: rgba(215,25,32,0.12); border-color: var(--obey-red); color: var(--obey-cream);">Enter the Evidence Wall →</a>
+  </div>
+
+  <div class="colophon">
+    No generated imagery · no tracking · no external scripts<br>
+    Every mark hand-authored · every citation verified · RECORD agent
+  </div>
+</footer>
+
+<!-- ======================= MODAL ======================= -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-body">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="m-kicker" id="modal-kicker">Artifact</div>
+    <h2 id="modal-title">—</h2>
+    <div class="m-rule"></div>
+    <div class="m-body" id="modal-body">—</div>
+    <div class="m-source" id="modal-source">—</div>
+    <div class="m-chapter" id="modal-chapter">—</div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DATA — twelve artifacts + four victim nodes.
+   Citations point to documented primary sources in the manuscript.
+   Excerpts are paraphrased; modal shows docket/archive info, not
+   reproduced copyrighted prose.
+   ===================================================================== */
+
+const ARTIFACTS = {
+
+  vesting: {
+    kicker: "Office of Alien Property Custodian",
+    title: "Vesting Order No. 248",
+    body: `On October 20, 1942, the United States government seized the assets of Union Banking Corporation under the Trading with the Enemy Act. UBC was one of a cluster of Brown Brothers Harriman–related entities frozen over documented Nazi-related commercial ties. Prescott S. Bush sat as a UBC director.
+
+The order was published in the Federal Register and remains in the public record. It is not a claim about character. It is a recorded government action against a named entity and its named officers.`,
+    source: "Vesting Order No. 248, 7 Fed. Reg. 8581 (Oct. 20, 1942). Office of Alien Property Custodian. Companion filings: Vesting Orders 259, 261, 370.",
+    chapter: "Chapter 3 · The Lineage"
+  },
+
+  cia: {
+    kicker: "Central Intelligence Agency",
+    title: "Dispatch 1035-960",
+    body: `Dated April 1, 1967 — the correct date on the document, which several widely circulated accounts mistate. Internal guidance to CIA station chiefs on managing foreign-press discussion of the Warren Commission's conclusions. The memo introduces the phrase "conspiracy theorists" as a framing device and proposes media-contact strategies.
+
+Declassified and available via the National Archives. Cited here for what it says about coordinated narrative management, not for what it implies about Dallas.`,
+    source: "CIA Dispatch No. 1035-960, Apr. 1, 1967. Declassified. National Archives RIF 104-10404-10376.",
+    chapter: "Chapter 5 · Narrative Discipline"
+  },
+
+  wexner: {
+    kicker: "Power of Attorney",
+    title: "Wexner → Epstein, 1991",
+    body: `On July 22, 1991, Leslie H. Wexner executed a general power of attorney in favor of Jeffrey E. Epstein, granting Epstein authority to act on his behalf — including the purchase, sale, and transfer of property and the signing of his personal name.
+
+The document was later introduced in court filings and is the foundation of the financial relationship that produced the Manhattan townhouse transfer and the L Brands adjacency documented in the manuscript.`,
+    source: "General Power of Attorney, Leslie H. Wexner to Jeffrey E. Epstein (July 22, 1991). Introduced in civil litigation; companion filings in U.S. v. Maxwell, 20-cr-330 (S.D.N.Y.).",
+    chapter: "Chapter 10 · The Operator"
+  },
+
+  oge: {
+    kicker: "U.S. Office of Government Ethics",
+    title: "Form 278e — the $57M entry",
+    body: `The annual public financial disclosure filed by a senior executive-branch official. One entry discloses outside income of approximately $57 million from a private entity in the period immediately preceding federal service.
+
+The form is a routine ethics filing. Its value to a primary-source investigation is that it is signed under penalty of perjury and is available to any member of the public who requests it.`,
+    source: "OGE Form 278e — Public Financial Disclosure. Filed with the U.S. Office of Government Ethics. Filer name and year on file in manuscript RECORD index.",
+    chapter: "Chapter 7 · The Ledger"
+  },
+
+  jpm: {
+    kicker: "Southern District of New York",
+    title: "JPMorgan — Due Diligence Report",
+    body: `In civil litigation arising from the Epstein estate, JPMorgan's internal compliance records were unsealed. The bank's own due diligence report, in its own language, repeatedly flagged the account holder's activities, and internal correspondence described the risk in direct terms.
+
+The specific quoted language is on the docket. The point here is simpler: the institution knew, in writing, and continued the relationship.`,
+    source: "USVI v. JPMorgan Chase Bank, N.A., 22-cv-10904 (S.D.N.Y.). Exhibit filings and deposition transcripts. See also Jane Doe 1 v. JPMorgan.",
+    chapter: "Chapter 10 · The Bank"
+  },
+
+  apollo: {
+    kicker: "SEC quarterly filing",
+    title: "Apollo 10-Q — 235 hospitals",
+    body: `Apollo Global Management's publicly filed 10-Q discloses its portfolio holdings, including healthcare assets totaling a specific hospital count in the reporting period.
+
+When a private equity firm owns a hospital, the hospital's staffing ratios, supply costs, and patient outcomes become a function of the return model. That is not an argument. It is a fact about who sits on the cap table.`,
+    source: "Apollo Global Management Inc., Form 10-Q, most recent reporting period. SEC EDGAR. Cross-reference: BlackRock Form 10-Q holdings schedule.",
+    chapter: "Chapter 4 · Portfolio"
+  },
+
+  monsanto: {
+    kicker: "San Francisco Superior Court",
+    title: "Johnson v. Monsanto",
+    body: `A California jury found Monsanto liable for the plaintiff's non-Hodgkin lymphoma and awarded substantial damages. The verdict was followed by Hardeman (federal) and Pilliod (state), with consistent findings across independent juries.
+
+The verdicts are not the end of the science. They are a data point about what juries concluded after being shown the internal documents now known as the Monsanto Papers.`,
+    source: "Johnson v. Monsanto Co., CGC-16-550128, Super. Ct. S.F. Cty.; Hardeman v. Monsanto (N.D. Cal.); Pilliod v. Monsanto (Alameda Cty.); In re Roundup Products Liability Litigation, MDL 2741.",
+    chapter: "Chapter 6 · The Papers"
+  },
+
+  mittelwerk: {
+    kicker: "Nuremberg / USSBS",
+    title: "Mittelwerk mortality",
+    body: `The Mittelwerk underground V-weapons facility in the Harz mountains produced V-2 rockets using concentrated forced labor from the Mittelbau-Dora camp system. Post-war investigations established a prisoner-mortality figure at the facility that exceeds the combatant death toll of the weapons produced there.
+
+That ratio is the fact. It anchors the post-war U.S. recruitment of personnel who ran that program.`,
+    source: "Nuremberg Subsequent Proceedings; U.S. Strategic Bombing Survey — European War; Mittelbau-Dora Memorial archival holdings; JIOA/Project Paperclip personnel files.",
+    chapter: "Chapter 3 · Paperclip"
+  },
+
+  flight: {
+    kicker: "Civil and criminal filings",
+    title: "Epstein flight logs",
+    body: `Flight logs and pilot testimony from Epstein's aircraft were introduced into evidence in multiple civil and criminal proceedings. They list named passengers and minor passengers without names.
+
+The logs are a primary source. They do not themselves establish what occurred on any given flight. They establish that the flight occurred and who was on the plane.`,
+    source: "Pilot logs introduced in U.S. v. Maxwell, 20-cr-330 (S.D.N.Y.); Giuffre v. Maxwell civil filings; EFTA unsealed records.",
+    chapter: "Chapter 8 · Transport"
+  },
+
+  orr: {
+    kicker: "HHS Office of Refugee Resettlement · GAO",
+    title: "The 85,000",
+    body: `Federal oversight findings established that HHS's Office of Refugee Resettlement was unable to account for tens of thousands of children it had placed with sponsors in recent reporting periods. The widely cited figure is approximately 85,000.
+
+It is a government-acknowledged tracking failure, not a political claim. It is the baseline from which any serious discussion of U.S. child-trafficking exposure has to begin.`,
+    source: "HHS ORR program reporting; U.S. Government Accountability Office oversight reports; Senate HSGAC hearing record.",
+    chapter: "Chapter 8 · The Children"
+  },
+
+  gaza: {
+    kicker: "Executive-branch memorandum",
+    title: "Gaza Reconstruction — Board of Peace",
+    body: `The reconstruction framework as currently structured contemplates a governance board with seat-level financial thresholds in the $1B range and appropriated reconstruction funds in the $70B range. The structure, the seats, and the thresholds are documented in the executive-branch and contractor materials cited here.
+
+Whether it is good policy is a separate question. Structurally, it is a construction and services program the size of a country's GDP controlled by a small board.`,
+    source: "White House fact sheet and executive memoranda on Gaza reconstruction; Carnegie Endowment analysis; appropriations and contractor filings.",
+    chapter: "Chapter 8 · Reconstruction"
+  },
+
+  author: {
+    kicker: "Author's mark",
+    title: "The ID on the cover",
+    body: `The cover of the book is a photograph of the author's prison ID.
+
+It is on the cover because the author did the work to earn the right to tell the reader that institutions are capable of processing a person, issuing them a number, and being wrong about them — and that the reader's willingness to examine the documents in this book does not require any academic credential, only attention.
+
+The book is written for his daughters. The ID is there because the record should be there.`,
+    source: "Cover artwork — They're Too Busy Marrying Themselves: Unwarranted Influence — A Primary-Source Investigation, 1095–2026. K. Jimenez (2026).",
+    chapter: "Cover · Author's note"
+  },
+
+  victims_orr: {
+    kicker: "Honored · not depicted",
+    title: "85,000 children",
+    body: `This node represents the approximately 85,000 children the Office of Refugee Resettlement was unable to locate after placement with sponsors, per federal oversight findings.
+
+They are not illustrated here. Illustrating them would be the wrong response to what the number represents. The node exists so that the count is present in the composition, and so that the citation below is always one tap away.`,
+    source: "HHS ORR; U.S. GAO; Senate HSGAC hearing record. See ORR node for full citations.",
+    chapter: "Chapter 8 · The Children"
+  },
+
+  victims_flight: {
+    kicker: "Honored · not depicted",
+    title: "Minors on flight logs",
+    body: `Flight logs entered into evidence across civil and criminal proceedings list minor passengers without names. This node represents them.
+
+No image. No composite. No reconstruction. The docket is the record.`,
+    source: "U.S. v. Maxwell, 20-cr-330 (S.D.N.Y.); Giuffre v. Maxwell; related civil filings; EFTA unsealed records.",
+    chapter: "Chapter 10 · The Operator"
+  },
+
+  victims_gaza: {
+    kicker: "Honored · not depicted",
+    title: "Children, Gaza",
+    body: `UNICEF and WHO casualty reporting in Gaza, 2023–2026, documents a child-casualty figure that is now a feature of the official record. This node carries that figure without illustrating it.`,
+    source: "UNICEF situation reports; WHO Health Cluster reports; U.N. OCHA humanitarian updates.",
+    chapter: "Chapter 8 · Reconstruction"
+  },
+
+  victims_roundup: {
+    kicker: "Honored · not depicted",
+    title: "Roundup plaintiffs",
+    body: `Named plaintiffs in Johnson, Hardeman, Pilliod, and the consolidated MDL. This node counts them without repeating names as art.`,
+    source: "Johnson v. Monsanto; Hardeman v. Monsanto; Pilliod v. Monsanto; In re Roundup Products Liability Litigation, MDL 2741.",
+    chapter: "Chapter 6 · The Papers"
+  }
+
+};
+
+/* ================== BUILD MANIFEST GRID ================== */
+const GRID_ORDER = [
+  ["vesting", "01"],
+  ["cia", "02"],
+  ["mittelwerk", "03"],
+  ["wexner", "04"],
+  ["oge", "05"],
+  ["jpm", "06"],
+  ["apollo", "07"],
+  ["monsanto", "08"],
+  ["flight", "09"],
+  ["orr", "10"],
+  ["gaza", "11"],
+  ["author", "12"],
+  ["victims_orr", "—"],
+  ["victims_flight", "—"],
+  ["victims_gaza", "—"],
+  ["victims_roundup", "—"]
+];
+
+const grid = document.getElementById("grid");
+GRID_ORDER.forEach(([id, n]) => {
+  const a = ARTIFACTS[id];
+  if (!a) return;
+  const isVictim = id.startsWith("victims_");
+  const card = document.createElement("button");
+  card.className = "card" + (isVictim ? " victim" : "");
+  card.setAttribute("data-id", id);
+  card.setAttribute("type", "button");
+  card.innerHTML = `
+    <div class="n">${n} · ${escapeHTML(a.kicker)}</div>
+    <h3>${escapeHTML(a.title)}</h3>
+    <p class="excerpt">${escapeHTML(a.body.split("\n")[0])}</p>
+    <div class="meta">
+      <span>${escapeHTML(a.chapter)}</span>
+      <span>Open →</span>
+    </div>
+  `;
+  card.addEventListener("click", () => openModal(id));
+  grid.appendChild(card);
+});
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* ================== MODAL ================== */
+const modal = document.getElementById("modal");
+const modalClose = document.getElementById("modalClose");
+const mKicker = document.getElementById("modal-kicker");
+const mTitle = document.getElementById("modal-title");
+const mBody = document.getElementById("modal-body");
+const mSource = document.getElementById("modal-source");
+const mChapter = document.getElementById("modal-chapter");
+
+let lastFocused = null;
+
+function openModal(id) {
+  const a = ARTIFACTS[id];
+  if (!a) return;
+  lastFocused = document.activeElement;
+  mKicker.textContent = a.kicker;
+  mTitle.textContent = a.title;
+  mBody.textContent = a.body;
+  mSource.innerHTML = `<span class="src-label">Source</span>${escapeHTML(a.source)}`;
+  mChapter.textContent = a.chapter;
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  modalClose.focus();
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+  if (lastFocused && lastFocused.focus) lastFocused.focus();
+}
+
+modalClose.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+/* ================== ORBITAL NODES ================== */
+document.querySelectorAll(".artifact[data-id]").forEach(node => {
+  node.addEventListener("click", () => openModal(node.dataset.id));
+});
+
+</script>
+
+</body>
+</html>

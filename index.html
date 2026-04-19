@@ -1,41 +1,227 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>They're Too Busy Marrying Themselves — Unwarranted Influence</title>
-<meta name="description" content="An interactive primary-source investigation spanning 1095–2026. Drag the board. Pull a thread.">
+<meta name="description" content="Unwarranted Influence: A Primary-Source Investigation, 1095–2026. By Kyle Jimenez. Free PDF download.">
 <meta property="og:title" content="They're Too Busy Marrying Themselves">
-<meta property="og:description" content="Unwarranted Influence: A Primary-Source Investigation, 1095–2026. Interactive companion to the book by Kyle Jimenez.">
+<meta property="og:description" content="A primary-source investigation spanning 931 years. Documents speak. The book arranges.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0d0d0d">
-<meta http-equiv="refresh" content="0; url=corkboard.html">
+<meta name="theme-color" content="#1a1a1a">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; background: #050505; color: #d4d0c8;
-    font-family: 'Courier New', monospace; display: flex;
-    align-items: center; justify-content: center; }
-  .hold {
-    text-align: center;
-    animation: fadeIn 0.6s ease-out;
+  :root {
+    --bg: #fafaf8;
+    --text: #1a1a1a;
+    --accent: #8b0000;
+    --muted: #666;
+    --line: #d4d4d4;
   }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  h1 { font-family: Georgia, serif; font-size: clamp(18px, 4vw, 32px);
-    font-weight: normal; color: #fff; letter-spacing: 0.05em;
-    margin-bottom: 12px; }
-  p { font-size: 12px; color: #666; letter-spacing: 0.2em; text-transform: uppercase; }
-  a { color: #b91c1c; text-decoration: none; letter-spacing: 0.15em;
-    font-size: 11px; border: 1px solid rgba(185,28,28,0.4);
-    padding: 8px 16px; display: inline-block; margin-top: 20px;
-    transition: background 150ms; }
-  a:hover { background: rgba(185,28,28,0.15); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  header {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 3rem;
+  }
+  h1 {
+    font-family: Georgia, serif;
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+  .author {
+    margin-top: 2rem;
+    color: var(--muted);
+  }
+  .cta-section {
+    text-align: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 3rem;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    margin: 0.5rem;
+    transition: background 0.2s;
+  }
+  .cta-button:hover {
+    background: var(--accent);
+  }
+  .cta-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--text);
+  }
+  .cta-secondary:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin: 2.5rem 0 1rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.5rem;
+  }
+  p { margin-bottom: 1rem; text-align: left; }
+  .viz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .viz-card {
+    border: 1px solid var(--line);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .viz-card:hover {
+    border-color: var(--accent);
+  }
+  .viz-card h3 {
+    font-family: Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+  }
+  .viz-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .quote {
+    margin: 2rem 0;
+    padding: 0 1.5rem;
+    border-left: 2px solid var(--accent);
+    font-style: italic;
+    color: var(--muted);
+  }
+  .method-note {
+    background: #f0f0f0;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+  }
+  .method-note h3 {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0.75rem;
+  }
+  .method-note ul {
+    margin-left: 1.5rem;
+  }
+  .method-note li {
+    margin-bottom: 0.3rem;
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  @media print {
+    body { font-size: 11pt; padding: 1cm; max-width: none; }
+  }
 </style>
 </head>
 <body>
-<div class="hold">
+
+<header>
   <h1>THEY'RE TOO BUSY MARRYING THEMSELVES</h1>
-  <p>Unwarranted Influence &nbsp;·&nbsp; A Primary-Source Investigation, 1095–2026</p>
-  <a href="corkboard.html">ENTER THE EVIDENCE BOARD →</a>
+  <p class="subtitle">Unwarranted Influence: A Primary-Source Investigation, 1095–2026</p>
+  <p class="author">Kyle Jimenez</p>
+</header>
+
+<div class="cta-section">
+  <p style="text-align: center; margin-bottom: 1.5rem; color: var(--muted);">
+    ~33,000 words · ~1,100 citations · Open access
+  </p>
+  <a href="unwarranted_influence.pdf" class="cta-button">Download PDF</a>
+  <a href="Corkboard.html" class="cta-button cta-secondary">Explore Evidence Board</a>
 </div>
+
+<div class="quote">
+  "In the councils of government, we must guard against the acquisition of unwarranted influence, whether sought or unsought, by the military-industrial complex. The potential for the disastrous rise of misplaced power exists and will persist."
+  <br>— President Dwight D. Eisenhower, Farewell Address, January 17, 1961
+</div>
+
+<h2>About This Book</h2>
+
+<p>Every factual claim in this book is sourced to a document: a declassified government filing, a court docket, a congressional report, an SEC disclosure, an ethics filing, or peer-reviewed historical scholarship. No anonymous sources. No hearsay.</p>
+
+<p>The book reconstructs, from primary documents, the operation of American legal, political, and commercial institutions across the period 1933 to 2026. The documents span 931 years — from the Council of Clermont in 1095 to the present — arranged to show the continuity of institutional power.</p>
+
+<div class="method-note">
+  <h3>On Method</h3>
+  <ul>
+    <li>Every citation is reproducible</li>
+    <li>No URL cited that was not personally verified</li>
+    <li>No claim made without a document</li>
+    <li>Where the record is ambiguous, the text says so</li>
+  </ul>
+</div>
+
+<h2>Interactive Visualizations</h2>
+
+<div class="viz-grid">
+  <a href="Corkboard.html" class="viz-card">
+    <h3>The Corkboard</h3>
+    <p>Drag the board. Pull a thread. An interactive evidence map connecting the primary documents across 931 years.</p>
+  </a>
+  <a href="Gallery.html" class="viz-card">
+    <h3>The Gallery</h3>
+    <p>A visual index of key figures, documents, and institutional connections referenced throughout the book.</p>
+  </a>
+</div>
+
+<h2>Contents</h2>
+
+<p><strong>Part I: The Warning</strong> — Two farewell addresses, sixty-four years apart.</p>
+<p><strong>Part II: The Pattern</strong> — Four documents spanning 847 years: Clermont, Rome, Maubuisson, New York.</p>
+<p><strong>Part III: The Long Empire</strong> — Papal bulls to Berlin Conference to Balfour.</p>
+<p><strong>Part IV: Corporations and Paperclip</strong> — Vesting Order 248, IBM, Ford, NASA's German inheritance.</p>
+<p><strong>Part V: The Poisoning</strong> — Monsanto Papers, Dispatch 1035-960, Epstein's kingdom.</p>
+<p><strong>Part VI: The Recapture</strong> — Citizens United, the Federalist Society pipeline, the new robber barons.</p>
+
+<div class="quote">
+  "Today, an oligarchy is taking shape in America of extreme wealth, power and influence that really threatens our entire democracy, our basic rights and freedoms, and a fair shot for everyone to get ahead."
+  <br>— President Joseph R. Biden, Farewell Address, January 15, 2025
+</div>
+
+<footer>
+  <p>Errors of fact identified by readers will be corrected in subsequent editions.</p>
+  <p style="margin-top: 1rem;">License: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: var(--muted);">CC BY-NC-ND 4.0</a></p>
+</footer>
+
 </body>
 </html>

@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>They're Too Busy Marrying Themselves — Unwarranted Influence</title>
+<meta name="description" content="A primary-source investigation, 1095–2026. Enter the Quiet Room, pull a thread on the Evidence Wall, or read the book.">
+<meta name="theme-color" content="#07060a">
+<meta property="og:title" content="They're Too Busy Marrying Themselves">
+<meta property="og:description" content="Unwarranted Influence — a primary-source investigation. 1095–2026.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   ENTRY — the cover plate for the site.
+   Shared palette with gallery.html and corkboard.html so the three
+   read as one work.
+   ===================================================================== */
+
+:root {
+  --obey-red:       #d71920;
+  --obey-cream:     #f4e9d5;
+  --obey-black:     #07060a;
+  --paper-fbi:      #c4b89a;
+  --stamp-red:      #b91c1c;
+  --chiaro-black:   #040308;
+  --chiaro-umber:   #1a0f07;
+  --chiaro-amber:   #c87b1a;
+  --chiaro-gold:    #e8a13b;
+  --cosmic-white:   #fff4d6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--chiaro-black);
+  color: var(--obey-cream);
+  font-family: "Special Elite", "Courier Prime", monospace;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 5vw, 48px) clamp(16px, 4vw, 32px);
+  background:
+    radial-gradient(ellipse 80% 60% at 78% 38%, rgba(232,161,59,0.14), transparent 55%),
+    radial-gradient(ellipse 120% 90% at 50% 50%, rgba(26,15,7,0.55), transparent 70%),
+    radial-gradient(ellipse 140% 100% at 50% 120%, #0a0608 0%, transparent 60%),
+    linear-gradient(180deg, #07060a 0%, #0a0708 40%, #050308 100%);
+}
+
+/* Grain + vignette — same treatment as gallery and corkboard */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.09  0 0 0 0 0.06  0 0 0 0.42 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.72) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Ambient background mandala — same grammar as gallery, subtler */
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.55;
+}
+
+.ambient svg {
+  width: min(95vmin, 900px);
+  height: min(95vmin, 900px);
+  animation: slowSpin 240s linear infinite;
+}
+
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ======================= HERO PLATE ======================= */
+.wrap {
+  position: relative;
+  z-index: 5;
+  max-width: 880px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 1.4s cubic-bezier(.2,.7,.2,1) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.kicker {
+  font-family: "Anton", sans-serif;
+  color: var(--obey-red);
+  letter-spacing: 0.42em;
+  font-size: clamp(10px, 2.4vw, 13px);
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--obey-cream);
+  font-size: clamp(34px, 9vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.6), 0 0 60px rgba(232,161,59,0.1);
+}
+
+h1 .em {
+  color: var(--chiaro-gold);
+  font-style: italic;
+}
+
+.spine {
+  margin: 30px auto 26px;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--obey-red), transparent);
+  opacity: 0.75;
+}
+
+.byline {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--obey-cream);
+  font-size: clamp(14px, 3vw, 18px);
+  line-height: 1.4;
+  opacity: 0.92;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.byline em {
+  color: var(--chiaro-gold);
+}
+
+.dateline {
+  margin-top: 14px;
+  font-family: "Courier Prime", monospace;
+  color: var(--paper-fbi);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* ======================= THE THREE DOORS ======================= */
+.doors {
+  margin-top: clamp(40px, 8vw, 68px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(12px, 2.5vw, 18px);
+}
+
+.door {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(22px, 4vw, 30px) clamp(18px, 3.5vw, 26px);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(232,161,59,0.1), transparent 60%),
+    linear-gradient(155deg, #13100c 0%, #0a0807 100%);
+  border: 1px solid rgba(196,184,154,0.18);
+  color: inherit;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 260ms cubic-bezier(.2,.7,.2,1), border-color 260ms, background 260ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.door:hover,
+.door:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(232,161,59,0.5);
+  outline: none;
+}
+
+.door::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, transparent 50%, rgba(215,25,32,0.65) 50%);
+}
+
+.door .num {
+  font-family: "Courier Prime", monospace;
+  color: var(--obey-red);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  margin-bottom: 14px;
+}
+
+.door h2 {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(20px, 4vw, 26px);
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--obey-cream);
+  margin-bottom: 12px;
+}
+
+.door p {
+  font-family: "Special Elite", monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--paper-fbi);
+  opacity: 0.85;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.door .go {
+  font-family: "Anton", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--chiaro-gold);
+  padding-top: 14px;
+  border-top: 1px dashed rgba(196,184,154,0.22);
+}
+
+.door.disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.door.disabled .go { color: var(--paper-fbi); }
+
+/* ======================= FOOTER ======================= */
+footer {
+  margin-top: clamp(40px, 7vw, 72px);
+  text-align: center;
+  font-family: "Courier Prime", monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--paper-fbi);
+  opacity: 0.5;
+  line-height: 1.8;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .ambient svg { animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient mandala — same grammar as the Quiet Room, as a background -->
+<div class="ambient" aria-hidden="true">
+  <svg viewBox="-500 -500 1000 1000" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="coreAmbient" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"  stop-color="#fff4d6" stop-opacity="0.7"/>
+        <stop offset="20%" stop-color="#e8a13b" stop-opacity="0.5"/>
+        <stop offset="50%" stop-color="#8b2323" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#040308" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="wobbleA">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="5"/>
+        <feDisplacementMap in="SourceGraphic" scale="3"/>
+      </filter>
+    </defs>
+
+    <circle r="180" fill="url(#coreAmbient)"/>
+
+    <g filter="url(#wobbleA)" fill="none" opacity="0.7">
+      <g stroke="#8b2323" stroke-width="0.7" opacity="0.4">
+        <circle r="460"/>
+        <circle r="420"/>
+      </g>
+      <g stroke="#c87b1a" stroke-width="0.5" opacity="0.55">
+        <circle r="360"/>
+        <circle r="300"/>
+        <circle r="240"/>
+        <circle r="180"/>
+      </g>
+      <g stroke="#c87b1a" stroke-width="0.4" opacity="0.4">
+        <line x1="0" y1="-460" x2="0" y2="460"/>
+        <line x1="-460" y1="0" x2="460" y2="0"/>
+        <line x1="-325" y1="-325" x2="325" y2="325"/>
+        <line x1="-325" y1="325" x2="325" y2="-325"/>
+        <line x1="-230" y1="-398" x2="230" y2="398"/>
+        <line x1="230" y1="-398" x2="-230" y2="398"/>
+        <line x1="-398" y1="-230" x2="398" y2="230"/>
+        <line x1="398" y1="-230" x2="-398" y2="230"/>
+      </g>
+      <g stroke="#e8a13b" stroke-width="0.5" opacity="0.3">
+        <circle r="120" cx="0" cy="0"/>
+        <circle r="120" cx="120" cy="0"/>
+        <circle r="120" cx="-120" cy="0"/>
+        <circle r="120" cx="60" cy="104"/>
+        <circle r="120" cx="-60" cy="104"/>
+        <circle r="120" cx="60" cy="-104"/>
+        <circle r="120" cx="-60" cy="-104"/>
+      </g>
+    </g>
+
+    <!-- Eight centuries -->
+    <g font-family="Courier Prime, monospace" font-size="11" fill="#f4e9d5" opacity="0.55" letter-spacing="2">
+      <text x="0" y="-250" text-anchor="middle">1095</text>
+      <text x="176" y="-176" text-anchor="middle" transform="rotate(45 176 -176)">1307</text>
+      <text x="250" y="0"  text-anchor="middle" transform="rotate(90 250 0)">1517</text>
+      <text x="176" y="176" text-anchor="middle" transform="rotate(135 176 176)">1776</text>
+      <text x="0" y="260"  text-anchor="middle">1913</text>
+      <text x="-176" y="176" text-anchor="middle" transform="rotate(-135 -176 176)">1942</text>
+      <text x="-250" y="0"  text-anchor="middle" transform="rotate(-90 -250 0)">1991</text>
+      <text x="-176" y="-176" text-anchor="middle" transform="rotate(-45 -176 -176)">2001</text>
+    </g>
+  </svg>
+</div>
+
+<!-- ======================= HERO ======================= -->
+<div class="wrap">
+
+  <div class="kicker">Unwarranted Influence · 1095 – 2026</div>
+
+  <h1>They're Too <span class="em">Busy</span><br>Marrying Themselves.</h1>
+
+  <div class="spine"></div>
+
+  <p class="byline">
+    Nobody cheers for the mascot.<br>
+    They cheer for the <em>quarterback</em>.
+  </p>
+
+  <div class="dateline">A primary-source investigation · K. Jimenez</div>
+
+  <!-- ======================= THREE DOORS ======================= -->
+  <div class="doors">
+
+    <a class="door" href="gallery.html" aria-label="Open The Quiet Room">
+      <div class="num">01 · Plate</div>
+      <h2>The Quiet Room</h2>
+      <p>Twelve documented artifacts arranged as a mandala. Tap any point to read the primary source. No generated images, no composites.</p>
+      <div class="go">Enter →</div>
+    </a>
+
+    <a class="door" href="corkboard.html" aria-label="Open the Evidence Wall">
+      <div class="num">02 · Board</div>
+      <h2>The Evidence Wall</h2>
+      <p>Ninety-three people, forty-five institutions, fifty events. Pull the strings yourself. Filter by chapter. Open any docket.</p>
+      <div class="go">Pull a thread →</div>
+    </a>
+
+    <a class="door disabled" aria-label="The book, release pending" tabindex="-1">
+      <div class="num">03 · Book</div>
+      <h2>The Manuscript</h2>
+      <p>Eight hundred years of the same play, traced through the record. Footnoted. Indexed. Verified by an automated citation pipeline.</p>
+      <div class="go">Coming soon</div>
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+  No tracking · no ads · no external scripts<br>
+  Every citation verified · RECORD agent
+</footer>
+
+</body>
+</html>
