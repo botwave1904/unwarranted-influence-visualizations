@@ -1646,6 +1646,50 @@ body.victim-mode .edge.to-victim path {
   overflow: hidden;
 }
 
+/* ======================= QUIET ROOM PREAMBLE =======================
+   A small mandala plays for 2.5s before the existing title typewriter
+   sequence fires. Matches the gallery.html grammar so the reader feels
+   one site, three rooms. Does not alter the existing intro timing — all
+   downstream delays are shifted by 2500ms in the JS below.
+*/
+#quiet-preamble {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0;
+  animation: preambleCycle 2.5s ease-in-out forwards;
+  pointer-events: none;
+}
+
+#quiet-preamble svg {
+  width: min(60vmin, 400px);
+  height: min(60vmin, 400px);
+}
+
+#quiet-preamble .preamble-mark {
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  color: #e8a13b;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+@keyframes preambleCycle {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 #intro.dissolving {
   animation: introFadeOut 0.8s ease-out forwards;
 }
@@ -1841,6 +1885,59 @@ body.victim-mode .edge.to-victim path {
 
 <!-- ===== INTRO OVERLAY ===== -->
 <div id="intro" role="region" aria-label="Introduction sequence">
+
+  <!-- Quiet Room preamble: a small mandala plays first, then dissolves into the title -->
+  <div id="quiet-preamble" aria-hidden="true">
+    <svg viewBox="-220 -220 440 440" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="preambleCore" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"  stop-color="#fff4d6" stop-opacity="0.85"/>
+          <stop offset="25%" stop-color="#e8a13b" stop-opacity="0.6"/>
+          <stop offset="60%" stop-color="#8b2323" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#040308" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="preambleWobble">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="5"/>
+          <feDisplacementMap in="SourceGraphic" scale="2.5"/>
+        </filter>
+      </defs>
+      <circle r="80" fill="url(#preambleCore)">
+        <animate attributeName="r" values="72;90;72" dur="2.4s" repeatCount="indefinite"/>
+      </circle>
+      <g filter="url(#preambleWobble)" fill="none">
+        <g stroke="#8b2323" stroke-width="0.6" opacity="0.45">
+          <circle r="200"/>
+          <circle r="180"/>
+        </g>
+        <g stroke="#c87b1a" stroke-width="0.5" opacity="0.6">
+          <circle r="150"/>
+          <circle r="120"/>
+          <circle r="90"/>
+        </g>
+        <g stroke="#c87b1a" stroke-width="0.35" opacity="0.4">
+          <line x1="0" y1="-200" x2="0" y2="200"/>
+          <line x1="-200" y1="0" x2="200" y2="0"/>
+          <line x1="-141" y1="-141" x2="141" y2="141"/>
+          <line x1="-141" y1="141" x2="141" y2="-141"/>
+        </g>
+        <g stroke="#e8a13b" stroke-width="0.4" opacity="0.35">
+          <circle r="50" cx="0" cy="0"/>
+          <circle r="50" cx="50" cy="0"/>
+          <circle r="50" cx="-50" cy="0"/>
+          <circle r="50" cx="25" cy="43"/>
+          <circle r="50" cx="-25" cy="43"/>
+          <circle r="50" cx="25" cy="-43"/>
+          <circle r="50" cx="-25" cy="-43"/>
+        </g>
+      </g>
+      <g font-family="Courier Prime, monospace" font-size="7" fill="#f4e9d5" opacity="0.6" letter-spacing="1">
+        <text x="0" y="-108" text-anchor="middle">1095</text>
+        <text x="0" y="115"  text-anchor="middle">2026</text>
+      </g>
+    </svg>
+    <div class="preamble-mark">The Quiet Room</div>
+  </div>
+
   <div id="intro-scanline" aria-hidden="true"></div>
   <div id="intro-content">
     <p id="intro-title" aria-live="polite"></p>
@@ -3802,41 +3899,43 @@ document.addEventListener("DOMContentLoaded", boot);
 
   /* -------------------------------------------------------
      Full cinematic sequence
+     All delays are shifted by +2500ms so the Quiet Room
+     preamble (CSS animation, 2.5s) plays first.
   ------------------------------------------------------- */
 
-  // 0.6s — red scan line draws
+  // 3.1s — red scan line draws (was 0.6s + 2.5s preamble)
   setTimeout(function () {
     scanline.classList.add('animate');
-  }, 600);
+  }, 3100);
 
-  // 1.2s — title typewriter begins
+  // 3.7s — title typewriter begins
   // Title is 36 chars, target ~1.6s duration = ~44ms per char
   var TITLE_TEXT = "THEY'RE TOO BUSY MARRYING THEMSELVES";
   setTimeout(function () {
     typewriter(titleEl, TITLE_TEXT, 44, null);
-  }, 1200);
+  }, 3700);
 
-  // 2.8s — subtitle fades in
+  // 5.3s — subtitle fades in
   setTimeout(function () {
     subtitleEl.classList.add('visible');
-  }, 2800);
+  }, 5300);
 
-  // 3.4s — author fades in
+  // 5.9s — author fades in
   setTimeout(function () {
     authorEl.classList.add('visible');
-  }, 3400);
+  }, 5900);
 
-  // 3.9s — red divider extends
+  // 6.4s — red divider extends
   setTimeout(function () {
     dividerEl.classList.add('visible');
-  }, 3900);
+  }, 6400);
 
-  // 4.2s — loading text appears
+  // 6.7s — loading text appears
   setTimeout(function () {
     loadingEl.classList.add('visible');
-  }, 4200);
+  }, 6700);
 
-  // 4.5s — progress bar fills over 1.5s
+  // 7.0s — progress bar fills over 1.5s
   setTimeout(function () {
     progressTrack.classList.add('visible');
     // Small rAF delay so the track is visible before bar starts
@@ -3845,10 +3944,10 @@ document.addEventListener("DOMContentLoaded", boot);
         progressBar.classList.add('animate');
       });
     });
-  }, 4500);
+  }, 7000);
 
-  // 5.8s — begin dissolve (progress bar finishes at ~6.0s, slight overlap is intentional)
-  setTimeout(finishIntro, 5800);
+  // 8.3s — begin dissolve (progress bar finishes at ~8.5s, slight overlap is intentional)
+  setTimeout(finishIntro, 8300);
 
 }());
 </script>
